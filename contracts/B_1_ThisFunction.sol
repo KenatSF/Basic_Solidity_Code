@@ -18,21 +18,32 @@ contract Giver {
       counting += _x;
     }
 
-    function signed_sum_x(uint _x) public {
+    function _signed_sum_x(uint _x) public {
         invited = _msgSender();
         sum_x(_x);
+    }
+
+    function signed_sum(uint _x) public virtual {
+        _signed_sum_x(_x);
     }
 
 }
 
 contract Taker is Giver {
 
-  function _signed_sum(uint _x) public {
-      signed_sum_x(_x);
+  function signed_sum(uint _x) public override{
+      _signed_sum_x(_x);
   }
 
-  function _this_signer_sum(uint _x) public {
-      this.signed_sum_x(_x);
+  function this_signer_sum(uint _x) public {
+      this._signed_sum_x(_x);
   }
   
+  function signed() public {            // Maybe in your contract your adding extra logic but the original function is stil usefull
+      signed_sum(100);
+  }
+
+  function signed_super() public {      // Maybe in your contract your adding extra logic but the original function is stil usefull
+      super.signed_sum(100);
+  }
 }
