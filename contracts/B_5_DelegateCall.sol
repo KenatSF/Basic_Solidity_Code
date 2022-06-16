@@ -2,6 +2,7 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 // NOTE: Deploy this contract first & My NOTE: This is the contract that would be updated multiple times like B1.0, B1.1, B1.2, ...
+// NOTE: There can not be constructors inside Bx.x because state variable will never be used. (OpenZeppelin use case @hardhat/truffle-upgrades)
 contract B {
     // NOTE: storage layout must be the same as contract A
     uint public num;
