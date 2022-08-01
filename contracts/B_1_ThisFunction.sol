@@ -43,7 +43,7 @@ contract Taker is Giver {
       signed_sum(100);
   }
 
-  function signed_super() public {      // Keyword super is used beacuse of there is a function at this contract with the same name #*
+  function signed_super() public {// Keyword super is used beacuse of there is a function at this contract with the same name #* Note: You could add extra code at this function
       super.signed_sum(100);
   }
 }
