@@ -31,19 +31,19 @@ contract Giver {
 
 contract Taker is Giver {
 
-  function signed_sum(uint _x) public override{
+  function signed_sum(uint _x) public override{         // #*
       _signed_sum_x(_x);
   }
 
-  function this_signer_sum(uint _x) public {
+  function this_signer_sum(uint _x) public {            // This is the only case where the contract itself is the msg.sender
       this._signed_sum_x(_x);
   }
   
-  function signed() public {            // Maybe in your contract your adding extra logic but the original function is stil usefull
+  function signed() public {            
       signed_sum(100);
   }
 
-  function signed_super() public {      // Maybe in your contract your adding extra logic but the original function is stil usefull
+  function signed_super() public {      // Keyword super is used beacuse of there is a function at this contract with the same name #*
       super.signed_sum(100);
   }
 }
