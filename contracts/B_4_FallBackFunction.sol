@@ -17,6 +17,8 @@ contract Fallback {
 
 contract SendToFallback {
     function transferToFallback(address payable _to) public payable {           // Gas cost: 32511
+        // send returns true/false in function of a successfull or not transaction
+        // transfer reverts transaction in case of some problem
         // send / transfer (just transfers 2,300 of gas to fallback() function in the contract)
         _to.transfer(msg.value);
     }
@@ -28,6 +30,5 @@ contract SendToFallback {
     }
 }
 
-
-// receive() function is needed for a contract be capable to receive ETH (for empty calldata) & (Must be external) & (Can not return anything)
+// receive() A smart contract requires reveive function to be able to receive ETH (empty calldata) & (Must be external) & (Can not return anything)
 // fallback() function is activated in case of a non-existent function is called (not even the receive() function ) & (optionally payable) & (Must be external) & (Can not return anything)
