@@ -21,7 +21,7 @@ contract A {            // Note: So this A contract is the main contract one & I
     address public sender;
     uint public value;
 
-    function setVars(address _contract, uint _num) public payable {
+    function setVars(address _contract, uint _num) public payable {             // Note: You can add gas: 121212 into delegatecall() same with call()
         // A's storage is set, B is not modified.
         //(bool success, ) = _contract.call(abi.encodeWithSignature("setVars(uint256)", _num));               // Las variables se guardan en B & msg.value = address(A)
         (bool success, ) = _contract.delegatecall(abi.encodeWithSignature("setVars(uint256)", _num));     // Las variables se guardan en A & msg.value = ACCOUNT_x
