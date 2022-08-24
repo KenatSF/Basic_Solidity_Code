@@ -19,15 +19,16 @@ contract MyAbi {
       string memory _message,
       uint8 _nonce
       ) public pure returns (bytes memory) {
-      return abi.encode(_to, _amount, _message, _nonce);
-      // Retunrs characters in packages of 32 bytes: 
-      //    address 32 bytes,
-      //    uint 245 bits = 32 bytes,
-      //    Position in bytes of string (array) _message variable (starting by array length) 32 bytes
-      //    uint8 _nonce but in uint 245 bits = 32 bytes
-      //    length of _message variable in 32 bytes
-      //    content of _message variable in 32 bytes
-      // Note: Basically an array has the format: position, length, array content codified with encode()
+        return abi.encode(_to, _amount, _message, _nonce);
+        // Returns characters in packages of 32 bytes = 256 bits: 
+        //    address _to: 32 bytes,
+        //    uint _amount: 32 bytes,
+        //    string memory _message ( Position in bytes of string [array], starting by array length): 32 bytes
+        //    uint8 _nonce: 32 bytes
+        //    bool booleano: 32 bytes
+        //    string memory _message (length of _message): 32 bytes
+        //    string memory _message: 32 bytes
+        // Note: Basically an array has the format: position, length, array content codified with encode()
   }
 
   function get_abi_encode_package(
@@ -37,12 +38,13 @@ contract MyAbi {
       uint8 _nonce, 
       bool booleano
   ) public pure returns (bytes memory) {
-      return abi.encodePacked(_to, _amount, _message, _nonce, booleano);
-      // Returns characters in function of type variable length: 
-      //    address 20 bytes, 
-      //    uint 256 bits = 32 bytes, 
-      //    string memory n° caracteres = n° bytes, 
-      //    uint8 8 bits = 1 byte
+        return abi.encodePacked(_to, _amount, _message, _nonce, booleano);
+        // Returns characters in function of type variable length: 
+        //    address _to: 20 bytes, 
+        //    uint _amount: 32 bytes, 
+        //    string memory _message: n° caracteres = n° bytes, 
+        //    uint8 _nonce: 1 byte
+        //    bool booleano: 1 byte
   }
 
 
