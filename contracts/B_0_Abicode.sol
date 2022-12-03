@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
 contract MyAbi {
   uint256 public counting;
 
@@ -61,6 +63,21 @@ contract MyAbi {
       (bool success, ) = address(this).call(_data);
       require(success, "sum_x_y() failed");
   }
+
+
+  // Formato un poco más claro para los casos de WithSelector & WithSignature:
+    function checkingData0(address token, address to, uint256 value) public view returns (bytes memory) {
+        bytes memory data = abi.encodeWithSelector(IERC20(token).transferFrom.selector, msg.sender, to, value);
+        return data;
+    }
+    function checkingData1(address to, uint256 value) public view returns (bytes memory) {
+        bytes memory data = abi.encodeWithSelector(bytes4(keccak256("transferFrom(address,address,uint256)")), msg.sender, to, value);
+        return data;
+    }
+    function checkingData0(address to, uint256 value) public view returns (bytes memory) {
+        bytes memory data = abi.encodeWithSignature("transferFrom(address,address,uint256)", msg.sender, to, value);
+        return data;
+    }
   
 
 }
